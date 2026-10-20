@@ -1,0 +1,27 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+Personal blog of flyfishchen, built with Astro (blog starter template) and deployed to GitHub Pages at https://flyfishchen.github.io. Site content is written in Chinese (`<html lang="zh-CN">`).
+
+## Commands
+
+Requires Node >= 22.22.
+
+- `npm install` — install dependencies
+- `npm run dev` — dev server at http://localhost:4321. When starting it from Claude Code, run it in the background: `npx astro dev --background`, managed with `npx astro dev stop|status|logs`
+- `npm run build` — static build into `dist/`; this also type-checks post frontmatter against the content schema, so use it to verify changes (there are no tests or linter)
+- `npm run preview` — serve the built `dist/`
+
+## Architecture
+
+- **Posts** live in `src/content/blog/*.md|mdx`. The filename becomes the URL slug (`/blog/<slug>/`). Frontmatter is validated by the schema in `src/content.config.ts`: `title`, `description`, `pubDate` are required; `updatedDate` and `heroImage` (relative path to an image in `src/assets/`) are optional. The layout renders `title` as the page `<h1>`, so post bodies should not repeat the title as a `#` heading.
+- **Routing**: `src/pages/blog/[...slug].astro` renders each post via `src/layouts/BlogPost.astro`; `src/pages/blog/index.astro` lists posts by `pubDate`; `src/pages/rss.xml.js` builds the RSS feed. `about.astro` reuses the `BlogPost` layout.
+- **Site-wide values**: title/description in `src/consts.ts`; `site` URL in `astro.config.mjs` (used for RSS, sitemap and canonical URLs). `BaseHead.astro` uses `src/assets/blog-placeholder-1.jpg` as the default OG image.
+- **Static files** in `public/` are copied verbatim to the site root. `public/.nojekyll` and `public/10e7a4090fb0ad8f0a2ca9de952e4b74.txt` (a site verification file) must stay there.
+
+## Deployment
+
+Pushing to `main` triggers `.github/workflows/deploy.yml` (`withastro/action` → `actions/deploy-pages`). The repo's Pages source must be set to "GitHub Actions". The repo is private, so git over HTTPS authenticates through the `gh` credential helper.

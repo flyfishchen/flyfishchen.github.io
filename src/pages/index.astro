@@ -1,0 +1,22 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>你好 👋</h1>
+			<p>这里是 flyfishchen 的个人博客，记录技术实践与思考。</p>
+			<p><a href="/blog">浏览全部文章 →</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
