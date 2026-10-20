@@ -23,6 +23,17 @@ Requires Node >= 22.22.
 - **Site-wide values**: title/description in `src/consts.ts`; `site` URL in `astro.config.mjs` (used for RSS, sitemap and canonical URLs). `og:image` is only emitted when a page has a `heroImage`.
 - **Static files** in `public/` are copied verbatim to the site root. `public/.nojekyll` and `public/10e7a4090fb0ad8f0a2ca9de952e4b74.txt` (a site verification file) must stay there.
 
+## Writing posts
+
+Readers are mostly on phones and many don't care about details. Structure every post as conclusion first, evidence after:
+
+- Open with a `## 先说结论` section of 3–5 short bullets, each a complete claim a reader can stop after. Follow with a short actionable section (e.g. `## 怎么做`) when the post leads to a recommendation.
+- Then a horizontal rule and one line telling readers the rest is the argument and can be skipped; data tables, derivations, configs and caveats go below it.
+- Keep paragraphs to 2–3 sentences. Prefer bullets and short per-item lists over wide tables near the top; wide tables are fine in the evidence part (they scroll horizontally).
+- Mark what is measured, what is from official docs, and what is speculation (`（推测）`). When a later test contradicts an earlier claim, say so explicitly instead of silently rewriting it.
+- Cite sources at the end under `## 参考资料`, and set `updatedDate` in frontmatter when revising a published post.
+- Don't name private infrastructure (internal gateways, hosts, account or project names).
+
 ## Deployment
 
 Pushing to `main` triggers `.github/workflows/deploy.yml` (`withastro/action` → `actions/deploy-pages`). The repo's Pages source must be set to "GitHub Actions". The repo is private, so git over HTTPS authenticates through the `gh` credential helper.
