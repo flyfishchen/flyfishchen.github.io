@@ -30,7 +30,7 @@ Readers are mostly on phones and many don't care about details. Structure every 
 - Open with a `## 先说结论` section of 3–5 short bullets, each a complete claim a reader can stop after. Follow with a short actionable section (e.g. `## 怎么做`) when the post leads to a recommendation.
 - Then a horizontal rule and one line telling readers the rest is the argument and can be skipped; data tables, derivations, configs and caveats go below it.
 - Keep paragraphs to 2–3 sentences. Prefer bullets and short per-item lists over wide tables near the top; wide tables are fine in the evidence part (they scroll horizontally).
-- Mark what is measured, what is from official docs, and what is speculation (`（推测）`). When a later test contradicts an earlier claim, say so explicitly instead of silently rewriting it.
+- Mark what is measured, what is from official docs, and what is speculation (`（推测）`). When a later test contradicts an earlier claim, rewrite it to the current finding; don't keep correction notes or the old wording.
 - Cite sources at the end under `## 参考资料`, and set `updatedDate` in frontmatter when revising a published post.
 - Don't name private infrastructure (internal gateways, hosts, account or project names).
 
