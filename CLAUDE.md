@@ -18,8 +18,9 @@ Requires Node >= 22.22.
 ## Architecture
 
 - **Posts** live in `src/content/blog/*.md|mdx`. The filename becomes the URL slug (`/blog/<slug>/`). Frontmatter is validated by the schema in `src/content.config.ts`: `title`, `description`, `pubDate` are required; `updatedDate` and `heroImage` (relative path to an image in `src/assets/`) are optional. The layout renders `title` as the page `<h1>`, so post bodies should not repeat the title as a `#` heading.
-- **Routing**: `src/pages/blog/[...slug].astro` renders each post via `src/layouts/BlogPost.astro`; `src/pages/blog/index.astro` lists posts by `pubDate`; `src/pages/rss.xml.js` builds the RSS feed. `about.astro` reuses the `BlogPost` layout.
-- **Site-wide values**: title/description in `src/consts.ts`; `site` URL in `astro.config.mjs` (used for RSS, sitemap and canonical URLs). `BaseHead.astro` uses `src/assets/blog-placeholder-1.jpg` as the default OG image.
+- **Routing**: `src/pages/blog/[...slug].astro` renders each post via `src/layouts/BlogPost.astro`; the home page (latest 10) and `src/pages/blog/index.astro` (all) both render posts through `src/components/PostList.astro`; `src/pages/rss.xml.js` builds the RSS feed. `about.astro` reuses the `BlogPost` layout without a `pubDate`.
+- **Styling** is deliberately minimal: a single narrow column, system CJK font stack, no web fonts. All colors and widths are CSS variables at the top of `src/styles/global.css`, redefined under `prefers-color-scheme: dark`; components use those variables rather than hard-coded colors. Code highlighting uses Shiki dual themes (`github-light`/`github-dark`, set in `astro.config.mjs`), switched to dark by a rule at the end of `global.css`. Markdown tables are `display: block` with `nowrap` cells so wide tables scroll horizontally.
+- **Site-wide values**: title/description in `src/consts.ts`; `site` URL in `astro.config.mjs` (used for RSS, sitemap and canonical URLs). `og:image` is only emitted when a page has a `heroImage`.
 - **Static files** in `public/` are copied verbatim to the site root. `public/.nojekyll` and `public/10e7a4090fb0ad8f0a2ca9de952e4b74.txt` (a site verification file) must stay there.
 
 ## Deployment

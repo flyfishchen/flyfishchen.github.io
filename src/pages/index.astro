@@ -1,8 +1,14 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import PostList from '../components/PostList.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 10);
 ---
 
 <!doctype html>
@@ -13,10 +19,35 @@ import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>你好 👋</h1>
-			<p>这里是 flyfishchen 的个人博客，记录技术实践与思考。</p>
-			<p><a href="/blog">浏览全部文章 →</a></p>
+			<section class="intro">
+				<h1>你好 👋</h1>
+				<p>这里是 flyfishchen 的个人博客，记录技术实践与思考。</p>
+			</section>
+			<section>
+				<h2>最近文章</h2>
+				<PostList posts={posts} />
+				<p class="more"><a href="/blog">全部文章 →</a></p>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+<style>
+	.intro {
+		margin-bottom: 3rem;
+	}
+	.intro p {
+		color: var(--muted);
+	}
+	h2 {
+		margin: 0 0 0.5rem;
+		color: var(--muted);
+		font-size: 0.85rem;
+		font-weight: 500;
+		letter-spacing: 0.05em;
+	}
+	.more {
+		margin-top: 1.5rem;
+		font-size: 0.9rem;
+	}
+</style>
