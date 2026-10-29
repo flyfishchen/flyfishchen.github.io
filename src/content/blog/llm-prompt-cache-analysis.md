@@ -2,7 +2,6 @@
 title: '大模型上下文缓存（Prompt Cache）架构与实测表现分析报告'
 description: '编程 Agent 卡顿常因缓存没命中、首字太慢。结论先行：Gemini 隐式缓存不可预期、Argon 首字慢且不稳，Claude 稳定可预期；订阅用户宜 Claude Opus 做主模型、Gemini 做子代理。附五组实测与开源子代理 skill。'
 pubDate: '2026-10-20'
-updatedDate: '2026-10-20'
 ---
 
 ## 先说结论

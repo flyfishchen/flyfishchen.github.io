@@ -34,7 +34,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 								<FormattedDate date={pubDate} />
 								{updatedDate && (
 									<span>
-										· 更新于 <FormattedDate date={updatedDate} />
+										{' · 更新于 '}<FormattedDate date={updatedDate} />
 									</span>
 								)}
 							</p>
